@@ -1,0 +1,65 @@
+Insert into Airline (line_name)
+    values ("Jet Blue");
+
+Insert into Airport (port_code, port_name, city, country)
+    values ("JFK", "John F. Kennedy", "NYC", "USA");
+
+Insert into Airport (port_code, port_name, city, country)
+    values ("PVG", "Shanghai Pudong", "Shanghai", "China");
+
+Insert into Customer (email, first_name, last_name, password, building_num, street, city, state,
+                      phone_num, passport_num, passport_exp,
+                      passport_country, date_of_birth)
+values ('josephjoestar@example.com', 'Joseph', 'Joestar', 'password123', '123', 'Thimble', 'Hicksville', 'NY',
+        '123-456-7899', 'X1234567', '2025-04-03', 'USA', '2004-10-24');
+
+Insert into Customer (email, first_name, last_name, password, building_num, street, city, state,
+                      phone_num, passport_num, passport_exp,
+                      passport_country, date_of_birth)
+values ('muhammedavdol@example.com', 'Muhammed', 'Avdol', 'password456', '456', 'Thimble', 'Hicksville', 'NY',
+        '234-567-8999', 'X2345678', '2025-04-04', 'USA', '2004-10-25');
+
+Insert into Customer (email, first_name, last_name, password, building_num, street, city, state,
+                      phone_num, passport_num, passport_exp,
+                      passport_country, date_of_birth)
+values ('noriyakikakyoin@example.com', 'Noriyaki', 'Kakyoin', 'password567', '567', 'Thimble', 'Hicksville', 'NY',
+        '345-678-9999', 'X3456789', '2025-04-05', 'USA', '2004-10-26');
+
+Insert into Airplane(line_name, plane_ID, seats, manufacturer)
+    values ("Jet Blue", "AA123", 180, "Boeing");
+
+Insert into Airplane(line_name, plane_ID, seats, manufacturer)
+    values ("Jet Blue", "AA234", 180, "Boeing");
+
+Insert into Airplane(line_name, plane_ID, seats, manufacturer)
+    values ("Jet Blue", "AA345", 180, "Boeing");
+
+Insert into Airline_Staff(username, password, first_name, last_name, date_of_birth, line_name)
+    values ("noobmaster", "1234", "Holly", "Joestar", "2004-10-27", "Jet Blue");
+
+Insert into Flight (flight_num, dep_date, dep_time, line_name, arr_date, arr_time, base_price, status, dep_port, arr_port, airplane_line_name, plane_ID)
+VALUES ('DL101', '2025-05-10', '08:00:00', 'Jet Blue', '2025-05-10', '10:30:00', 350.00, 'On-Time', 'JFK', 'PVG', 'Jet Blue', 'AA123');
+
+Insert into Flight (flight_num, dep_date, dep_time, line_name, arr_date, arr_time, base_price, status, dep_port, arr_port, airplane_line_name, plane_ID)
+VALUES ('DL102', '2025-05-11', '08:00:00', 'Jet Blue', '2025-05-11', '10:30:00', 350.00, 'On-Time', 'JFK', 'PVG', 'Jet Blue', 'AA234');
+
+Insert into Flight (flight_num, dep_date, dep_time, line_name, arr_date, arr_time, base_price, status, dep_port, arr_port, airplane_line_name, plane_ID)
+VALUES ('DL103', '2025-05-12', '08:00:00', 'Jet Blue', '2025-05-12', '10:30:00', 350.00, 'Delayed', 'JFK', 'PVG', 'Jet Blue', 'AA345');
+
+Insert into Ticket (ticket_ID, email, flight_num, dep_date, dep_time, line_name)
+VALUES ('TKT1000', 'josephjoestar@example.com', 'DL101', '2025-05-10', '08:00:00', 'Jet Blue');
+
+Insert into Ticket (ticket_ID, email, flight_num, dep_date, dep_time, line_name)
+VALUES ('TKT1001', 'muhammedavdol@example.com', 'DL102', '2025-05-11', '08:00:00', 'Jet Blue');
+
+Insert into Ticket (ticket_ID, email, flight_num, dep_date, dep_time, line_name)
+VALUES ('TKT1002', 'noriyakikakyoin@example.com', 'DL103', '2025-05-12', '08:00:00', 'Jet Blue');
+
+Insert into Purchased (ticket_ID, email, card_type, card_num, card_name, card_exp, purchase_date, purchase_time)
+VALUES ('TKT1000', 'josephjoestar@example.com', 'Visa', '1111111111111111', 'Josef Joestar', '2027-06-30', '2025-04-01', '14:00:00');
+
+Insert into Purchased (ticket_ID, email, card_type, card_num, card_name, card_exp, purchase_date, purchase_time)
+VALUES ('TKT1001', 'muhammedavdol@example.com', 'Visa', '2222222222222222', 'Muhammed Avdol', '2027-06-30', '2025-04-01', '15:00:00');
+
+Insert into Purchased (ticket_ID, email, card_type, card_num, card_name, card_exp, purchase_date, purchase_time)
+VALUES ('TKT1002', 'noriyakikakyoin@example.com', 'Visa', '3333333333333333', 'Noriyaki Kakyoin', '2027-06-30', '2025-04-01', '16:00:00');

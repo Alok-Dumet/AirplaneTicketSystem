@@ -1,0 +1,116 @@
+CREATE TABLE Airline (
+    line_name VARCHAR(100) PRIMARY KEY
+);
+
+CREATE TABLE Airline_Staff (
+    username VARCHAR(100) PRIMARY KEY,
+    password VARCHAR(100),
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    date_of_birth DATE,
+    line_name VARCHAR(100),
+    FOREIGN KEY (line_name) REFERENCES Airline(line_name)
+);
+
+CREATE TABLE Staff_Email (
+    username VARCHAR(100),
+    email VARCHAR(100),
+    PRIMARY KEY (username, email),
+    FOREIGN KEY (username) REFERENCES Airline_Staff(username)
+);
+
+CREATE TABLE Staff_Phone_Num (
+    username VARCHAR(100),
+    phone_num VARCHAR(100),
+    PRIMARY KEY (username, phone_num),
+    FOREIGN KEY (username) REFERENCES Airline_Staff(username)
+);
+
+CREATE TABLE Airport (
+    port_code VARCHAR(100) PRIMARY KEY,
+    port_name VARCHAR(100),
+    city VARCHAR(100),
+    country VARCHAR(100)
+);
+
+CREATE TABLE Airplane (
+    line_name VARCHAR(100),
+    plane_ID VARCHAR(100),
+    seats INT,
+    manufacturer VARCHAR(100),
+    PRIMARY KEY (line_name, plane_ID),
+    FOREIGN KEY (line_name) REFERENCES Airline(line_name)
+);
+
+CREATE TABLE Flight (
+    flight_num VARCHAR(100),
+    dep_date DATE,
+    dep_time TIME,
+    line_name VARCHAR(100),
+    arr_date DATE,
+    arr_time TIME,
+    base_price DECIMAL(10, 2),
+    status VARCHAR(100),
+    dep_port VARCHAR(100),
+    arr_port VARCHAR(100),
+    airplane_line_name VARCHAR(100),
+    plane_ID VARCHAR(100),
+    PRIMARY KEY (flight_num, dep_date, dep_time, line_name),
+    FOREIGN KEY (line_name) REFERENCES Airline(line_name),
+    FOREIGN KEY (dep_port) REFERENCES Airport(port_code),
+    FOREIGN KEY (arr_port) REFERENCES Airport(port_code),
+    FOREIGN KEY (airplane_line_name, plane_ID) REFERENCES Airplane(line_name, plane_ID)
+);
+
+CREATE TABLE Customer (
+    email VARCHAR(100) PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    password VARCHAR(100),
+    building_num VARCHAR(100),
+    street VARCHAR(100),
+    city VARCHAR(100),
+    state VARCHAR(100),
+    phone_num VARCHAR(100),
+    passport_num VARCHAR(100),
+    passport_exp DATE,
+    passport_country VARCHAR(100),
+    date_of_birth DATE
+);
+
+CREATE TABLE Taken (
+    flight_num VARCHAR(100),
+    dep_date DATE,
+    dep_time TIME,
+    line_name VARCHAR(100),
+    email VARCHAR(100),
+    rating INT,
+    comment VARCHAR(100),
+    PRIMARY KEY (flight_num, dep_date, dep_time, line_name, email),
+    FOREIGN KEY (flight_num, dep_date, dep_time, line_name) REFERENCES Flight(flight_num, dep_date, dep_time, line_name),
+    FOREIGN KEY (email) REFERENCES Customer(email)
+);
+
+CREATE TABLE Ticket (
+    ticket_ID VARCHAR(100) PRIMARY KEY,
+    email VARCHAR(100),
+    flight_num VARCHAR(100),
+    dep_date DATE,
+    dep_time TIME,
+    line_name VARCHAR(100),
+    FOREIGN KEY (flight_num, dep_date, dep_time, line_name) REFERENCES Flight(flight_num, dep_date, dep_time, line_name)
+);
+
+CREATE TABLE Purchased (
+    ticket_ID VARCHAR(100),
+    email VARCHAR(100),
+    card_type VARCHAR(100),
+    card_num VARCHAR(100),
+    card_name VARCHAR(100),
+    card_exp DATE,
+    purchase_date DATE,
+    purchase_time TIME,
+    PRIMARY KEY (ticket_ID, email),
+    FOREIGN KEY (email) REFERENCES Customer(email),
+    FOREIGN KEY (ticket_ID) REFERENCES Ticket(ticket_ID)
+);
