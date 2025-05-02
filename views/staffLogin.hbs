@@ -8,8 +8,8 @@
 <body>
   <div class="publicPage">
   <div class="loginRegisterContainer">
-    <form method="POST" action="/customerLogin">
-      <input type="text" name="email" placeholder="email" required />
+    <form method="POST" action="/staffLogin">
+      <input type="text" name="username" placeholder="username" required />
       <input type="password" name="password" placeholder="password" required />
       <input type="submit" value="Login" />
       {{#if error}}<p><strong>Error:</strong> {{error}}</p>{{/if}}
@@ -17,7 +17,7 @@
     <div class="loginRegisterAnchor">
       <p>Don't Have a Customer Account? <a href="/customerRegister">Register</a></p>
       <p>Don't Have a Staff Account? <a href="/staffRegister">Register</a></p>
-      <p>Want to Login as Staff? <a href="/staffLogin">Login</a></p>
+      <p>Want to Login as a Customer? <a href="/customerLogin">Login</a></p>
     </div>
     <p class="loginRegisterAnchor">
       Want to check flight info? <a href="/publicInfo">Check Flights</a>

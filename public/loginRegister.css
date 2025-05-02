@@ -83,3 +83,16 @@ body {
     text-decoration: underline;
     font-weight: bold;
   }
+
+  .loginRegisterContainer .loginRegisterAnchor p {
+    margin-top: 5px;
+    text-align: center;
+    font-size: 0.95rem;
+    color:#ffffff
+  }
+
+  .loginRegisterContainer .loginRegisterAnchor p a {
+    color: rgb(0, 208, 255);
+    text-decoration: underline;
+    font-weight: bold;
+  }

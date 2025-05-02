@@ -9,7 +9,22 @@
 <body>
 
   <p class="loginRegisterAnchor">
-    Go back to login? <a href="/customerLogin">Return</a>
+    {{#if user.email}}
+      <p class="loginRegisterAnchor">
+        Go back to Home Page? <a href="/">Return</a>
+      </p>
+    {{else}}
+      {{#if user.username}}
+        <p class="loginRegisterAnchor">
+          Go back to Home Page? <a href="/">Return</a>
+        </p>
+      {{else}}
+        <p class="loginRegisterAnchor">
+          Go back to customer login? <a href="/customerLogin">Return</a>
+          Go back to staff login? <a href="/staffLogin">Return</a>
+        </p>
+      {{/if}}
+    {{/if}}
   </p>
   
   <form method="POST" action="/publicInfo" class="inputs">

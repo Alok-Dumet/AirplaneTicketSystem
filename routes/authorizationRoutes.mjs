@@ -23,26 +23,26 @@ export default function isAuthenticated(req, res, next){
   }
 }
 
-//Render register page
+//Render customer register page
 router.get('/customerRegister', (req, res) => {
   res.render('customerRegister', {error: null });
 });
 
-//Check for valid registration
+//Check for valid customer registration
 router.post('/customerRegister', (req, res) => {
-  let email = req.body.email;
-    
+  let {
+    email, first_name, last_name, password,
+    building_num, street, city, state,
+    phone_num, passport_num, passport_exp,
+    passport_country, date_of_birth
+  } = req.body;
+
+  //Selects all customers with email same as the users registered email
   connection.query('SELECT * FROM airplaneSystem.customer WHERE email = ?', [email], async (err, results) => {
     if (results.length > 0) {
       res.render('customerRegister', { error: 'User already exists' });
     }
     else{
-      let {
-        email, first_name, last_name, password,
-        building_num, street, city, state,
-        phone_num, passport_num, passport_exp,
-        passport_country, date_of_birth
-      } = req.body;
 
       let hashedPassword = await bcrypt.hash(password, 10);
       
@@ -65,20 +65,17 @@ router.post('/customerRegister', (req, res) => {
   });
 });
 
-//Render login page
+//Render customer login page
 router.get('/customerLogin', (req, res) => {
   res.render('customerLogin', { error: null });
 });
 
-//Check for valid login
+//Check for valid customer login
 router.post('/customerLogin', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
     console.log("accessing database")
   connection.query('SELECT * FROM airplaneSystem.customer WHERE email = ?', [email], async (err, results) => {
-    if(err){
-      return res.render('customerLogin', { error: err.message });
-    }
     if (results.length > 0) {
       console.log("comparing with hash");
       let found = await bcrypt.compare(password, results[0].password);
@@ -98,6 +95,77 @@ router.post('/customerLogin', (req, res) => {
     }
   });
 });
+
+//Render staff register page
+router.get('/staffRegister', (req, res) => {
+  res.render('staffRegister', {error: null });
+});
+
+//Check for valid staff registration
+router.post('/staffRegister', (req, res) => {
+  let {username, password, first_name, last_name, date_of_birth, line_name} = req.body;
+
+  //Selects all staff with email same as the users registered email
+  connection.query('SELECT * FROM airplaneSystem.airline_staff WHERE username = ?', [username], async (err, results) => {
+    if (results.length > 0) {
+      res.render('staffRegister', { error: 'Staff already exists' });
+    }
+    else{
+      connection.query('SELECT * FROM airplaneSystem.airline WHERE line_name = ?', [line_name], async (err, results) => {
+        if (results.length < 1) {
+          res.render('staffRegister', { error: 'Airline does not exist' });
+        }
+        else{
+    
+          let hashedPassword = await bcrypt.hash(password, 10);
+          
+          let values = [username, hashedPassword, first_name, last_name, date_of_birth, line_name];
+    
+          let query = "INSERT INTO airplaneSystem.airline_staff (username, password, first_name, last_name, date_of_birth, line_name) VALUES (?, ?, ?, ?, ?, ?)"
+            connection.query(query, values, (err, result) => {
+              if(err){
+                res.render('staffRegister', { error: err.message });
+              }
+                req.session.username = username;
+                res.redirect('/');
+              });
+        }
+      });
+    }
+  });
+});
+
+//Render staff login page
+router.get('/staffLogin', (req, res) => {
+  res.render('staffLogin', { error: null });
+});
+
+//Check for valid staff login
+router.post('/staffLogin', (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    console.log("accessing database")
+  connection.query('SELECT * FROM airplaneSystem.airline_staff WHERE username = ?', [username], async (err, results) => {
+    if (results.length > 0) {
+      console.log("comparing with hash");
+      let found = await bcrypt.compare(password, results[0].password);
+
+      if(found){
+        console.log("found")
+        req.session.username = username;
+        res.redirect('/');
+      }
+      else{
+        console.log("wrong password")
+        res.render('staffLogin', { error: 'Invalid credentials' });
+      }
+    } else {
+      console.log("user not found")
+      res.render('staffLogin', { error: 'Invalid credentials' });
+    }
+  });
+});
+
 
 export{
     router
