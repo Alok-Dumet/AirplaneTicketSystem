@@ -1,78 +1,18 @@
+*{
+  box-sizing: border-box;
+}
 
 body {
     margin: 0;
     padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #000d57;
-    color: #333;
-  }
-
-  .loginRegisterContainer{
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-  }
-  
-  form {
-    max-width: 400px;
-    margin: 80px auto 20px;
-    padding: 2rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-  
-  input[type="text"],
-  input[type="password"],
-  input[type="submit"] {
-    padding: 0.8rem;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-    transition: border 0.2s;
-  }
-  
-  input[type="text"]:focus,
-  input[type="password"]:focus {
-    border-color: #6a5acd;
-    outline: none;
-  }
-  
-  input[type="submit"] {
-    background-color: #6a5acd;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  input[type="submit"]:hover {
-    background-color: #5a4bbd;
-  }
-  
-  p strong {
     color: #ffffff;
   }
   
-  .loginRegisterAnchor {
-    text-align: center;
-    font-size: 0.95rem;
-    color:#ffffff
-  }
-
-  .loginRegisterAnchor a {
-    color: rgb(0, 208, 255);
-    text-decoration: underline;
-    font-weight: bold;
-  }
-  
   .topBar {
-    background-color: #1a1f5c; /* deep bluish purple */
+    height: 100px;
+    background-color: #2f3366; /* deep bluish purple */
     padding: 1rem 2rem;
     display: flex;
     justify-content: space-between;
@@ -87,6 +27,13 @@ body {
     right: 10px;
     font-size: 1.5rem;
     color: #ffffff;
+    transition: color 0.3s;
+  }
+
+  .topBar h1:hover{
+    font-size: 1.5rem;
+    color: #aaaaaa;
+    cursor: pointer;
   }
   
   .topBar a {
@@ -105,4 +52,23 @@ body {
     background-color: #5542a7;
     color: #ffffff;
   }
+
+  .sideBar {
+    padding: 10px;
+    position: fixed;
+    top: 100px;
+    right: 0px;
+    width: 150px;
+    background-color: #2f00ff; 
+    border-radius: 12px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 900;
+  }
   
+
+  .hidden{
+    display: none;
+  }

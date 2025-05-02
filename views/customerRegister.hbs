@@ -1,27 +1,38 @@
-<div class="loginRegisterContainer">
-  <form method="POST" action="/customerRegister">
-    <input type="text" name="email" placeholder="Email" required />
-    <input type="text" name="first_name" placeholder="First Name" required />
-    <input type="text" name="last_name" placeholder="Last Name" required />
-    <input type="password" name="password" placeholder="Password" required />
-    <input type="text" name="building_num" placeholder="Building Number" required />
-    <input type="text" name="street" placeholder="Street" required />
-    <input type="text" name="city" placeholder="City" required />
-    <input type="text" name="state" placeholder="State" required />
-    <input type="tel" name="phone_num" placeholder="Phone Number" required />
-    <input type="text" name="passport_num" placeholder="Passport Number" required />
-    <div class="passportLabel">Passport Expiration Date</div>
-    <input type="date" name="passport_exp" placeholder="Passport Expiration" required />
-    <input type="text" name="passport_country" placeholder="Passport Country" required />
-    <div class="birthLabel">Date of Birth</div>
-    <input type="date" name="date_of_birth" placeholder="Date of Birth" required />
-    <input type="submit" value="Register" />
-    {{#if error}}
-      <p><strong>Error:</strong>{{error}}</p>
-    {{/if}}
-  </form>
 
-  <p class="loginRegisterAnchor">
-    Have an Account? <a href="/customerLogin">Login</a>
-  </p>
-</div>
+<!DOCTYPE html>
+<style href=""></style>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="/loginRegister.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+  <div class="loginRegisterContainer">
+    <form method="POST" action="/customerRegister">
+      <input type="text" name="email" placeholder="Email" required />
+      <input type="text" name="first_name" placeholder="First Name" required />
+      <input type="text" name="last_name" placeholder="Last Name" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <input type="text" name="building_num" placeholder="Building Number" required />
+      <input type="text" name="street" placeholder="Street" required />
+      <input type="text" name="city" placeholder="City" required />
+      <input type="text" name="state" placeholder="State" required />
+      <input type="tel" name="phone_num" placeholder="Phone Number" required />
+      <input type="text" name="passport_num" placeholder="Passport Number" required />
+      <div class="passportLabel">Passport Expiration Date</div>
+      <input type="date" name="passport_exp" placeholder="Passport Expiration" required />
+      <input type="text" name="passport_country" placeholder="Passport Country" required />
+      <div class="birthLabel">Date of Birth</div>
+      <input type="date" name="date_of_birth" placeholder="Date of Birth" required />
+      <input type="submit" value="Register" />
+      {{#if error}}
+        <p><strong>Error:</strong>{{error}}</p>
+      {{/if}}
+    </form>
+
+    <p class="loginRegisterAnchor">
+      Have an Account? <a href="/customerLogin">Login</a>
+    </p>
+  </div>
+</body>
+</html>

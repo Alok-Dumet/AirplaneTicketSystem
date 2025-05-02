@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<style href=""></style>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="/publicInfo.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+
+  <p class="loginRegisterAnchor">
+    Go back to login? <a href="/customerLogin">Return</a>
+  </p>
+  
+  <form method="POST" action="/publicInfo" class="inputs">
+    <select name="depArr" class="clickable">
+      <option value="Departure" class="clickable">Departure</option>
+      <option value="Arrival" class="clickable">Return</option>
+    </select>
+    <input type="text" name="sourceCity" placeholder="source port city"/>
+    <input type="text" name="sourceName" placeholder="source port name"/>
+    <input type="text" name="destCity" placeholder="destination port city "/>
+    <input type="text" name="destName" placeholder="destination port name"/>
+    <input type="date" name="date" placeholder="date" class="clickable"/>
+    <input type="submit" class="searchButton clickable" value="Search"></input>
+  </form>
+
+  <div class="resultsContainer">
+
+  </div>
+
+  <script src="/js/publicInfo.js" defer></script>
+<body>
+<html>

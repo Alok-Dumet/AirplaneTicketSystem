@@ -25,7 +25,7 @@ export default function isAuthenticated(req, res, next){
 
 //Render register page
 router.get('/customerRegister', (req, res) => {
-  res.render('customerRegister', { error: null });
+  res.render('customerRegister', {error: null });
 });
 
 //Check for valid registration

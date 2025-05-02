@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { connection } from './db.mjs';
 import {router as authorizationRouter} from "./routes/authorizationRoutes.mjs"
+import {router as publicRouter} from "./routes/publicRoute.mjs"
 import isAuthenticated from './routes/authorizationRoutes.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,6 +20,10 @@ app.set('views', path.join(__dirname, 'views'));
 
 //I accept post data as key=value pairs
 app.use(express.urlencoded({ extended: false }));
+
+//allows me to read req.body as jsons also
+app.use(express.json());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Setting up sessions. Adds the .user property to req
@@ -47,18 +52,13 @@ app.use(isAuthenticated);
 //Handles login and register routes
 app.use(authorizationRouter);
 
+//Handles public info
+app.use(publicRouter);
+
 //Home page
 app.get('/', (req, res) => {
   res.render('index');
 });
-
-// app.post('/post', (req, res) => {
-//     let username = req.session.username;
-//     let blog = req.body.blog;
-//     connection.query('INSERT INTO blog (blog_post, username) VALUES (?, ?)', [blog, username], () => {
-//         res.redirect('/');
-//     });
-// });
 
 app.get('/logout', (req, res) => {
   req.session.destroy(() => res.redirect('/customerLogin'));
