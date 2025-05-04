@@ -1,7 +1,6 @@
-
 let form = document.querySelector(".inputs")
 
-async function fetchPublicInfo(e){
+async function fetchFlightInfo(e){
     //after posting your filters, don't reload the page
     if(e){
       e.preventDefault();
@@ -14,9 +13,9 @@ async function fetchPublicInfo(e){
       sourceName: form.sourceName.value,
       destCity: form.destCity.value,
       destName: form.destName.value,
-      date: form.date.value
+      endDate: form.endDate.value
       };
-    let res = await fetch("/publicInfo", {
+    let res = await fetch("/searchFlights", {
       method: "POST",
       headers: {
       "Content-Type": "application/json"
@@ -45,8 +44,7 @@ async function fetchPublicInfo(e){
       //Header row
       let header = ["Flight #", "Departure Date", "Departure Time", "Airline",
         "Arrival Date", "Arrival Time", "Base Price", "Status", "Departure Port", "Arrival Port",
-        "Airplane Airline", "Plane ID", "Departure City", "Departure Port Name", "Arrival City", "Arrival Port Name"
-      ]
+        "Airplane Airline", "Plane ID", "Departure City", "Departure Port Name", "Arrival City", "Arrival Port Name"]
       //for every attribute, make a tableheader cell and add it to the first table row
       header.forEach((attribute) => {
           let th = document.createElement("th");
@@ -78,6 +76,7 @@ async function fetchPublicInfo(e){
   
 }
 
-form.addEventListener("submit", fetchPublicInfo);
+form.addEventListener("submit", fetchFlightInfo);
 
-fetchPublicInfo();
+
+fetchFlightInfo();

@@ -4,11 +4,14 @@
 <html>
 <head>
 <title></title>
-<link rel="stylesheet" href="/loginRegister.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/general.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/form.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/loginRegister.css" type="text/css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-  <div class="loginRegisterContainer">
+  <div class="formContainer">
     <form method="POST" action="/customerRegister">
+      <div class="pageName">CUSTOMER REGISTER</div>
       <input type="text" name="email" placeholder="Email" required />
       <input type="text" name="first_name" placeholder="First Name" required />
       <input type="text" name="last_name" placeholder="Last Name" required />
@@ -25,16 +28,15 @@
       <div class="birthLabel">Date of Birth</div>
       <input type="date" name="date_of_birth" placeholder="Date of Birth" required />
       <input type="submit" value="Register" />
-      {{#if error}}
-        <p><strong>Error:</strong>{{error}}</p>
-      {{/if}}
+      {{#if error}}<p>{{error}}</p>{{/if}}
     </form>
-
-    <div class="loginRegisterAnchor">
-      <p>Have a Customer Account? <a href="/customerLogin">Login</a></p>
-      <p>Have a Staff Account? <a href="/staffLogin">Login</a></p>
-      <p>Want to Register as staff? <a href="/staffRegister">Register</a></p>
-    </div>
   </div>
+
+  <div class="formAnchor">
+    <p>Have a Customer Account? <a href="/customerLogin">Login</a></p>
+    <p>Have a Staff Account? <a href="/staffLogin">Login</a></p>
+    <p>Want to Register as staff? <a href="/staffRegister">Register</a></p>
+  </div>
+  
 </body>
 </html>

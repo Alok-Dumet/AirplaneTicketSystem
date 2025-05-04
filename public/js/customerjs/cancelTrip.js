@@ -1,7 +1,41 @@
-
 let form = document.querySelector(".inputs")
+let popUp = document.querySelector(".popUp");
+let popUpForm = document.querySelector(".popUpForm");
 
-async function fetchPublicInfo(e){
+//on click of a row delete the ticket correlated to this flight
+async function deleteTicket(event){
+    event.preventDefault();
+    let flight = event.currentTarget.flightData;
+
+    let formData = {flight_num: flight.flight_num, dep_date: flight.dep_date, dep_time: flight.dep_time, line_name: flight.line_name};
+  
+    let res = await fetch("/cancelTrip", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    });
+  
+    res = await res.json();
+  
+    //Fade out message
+    const message = document.createElement("div");
+    if(!res.error){
+      message.textContent = "Cancel Succesful";
+    }else{
+      message.textContent = res.error;
+    }
+    message.className = "completionMessage";
+    document.body.appendChild(message);
+    setTimeout(() => {
+      message.remove();
+    }, 3000);
+  
+    fetchFlightInfo();
+}
+
+async function fetchFlightInfo(e){
     //after posting your filters, don't reload the page
     if(e){
       e.preventDefault();
@@ -14,9 +48,9 @@ async function fetchPublicInfo(e){
       sourceName: form.sourceName.value,
       destCity: form.destCity.value,
       destName: form.destName.value,
-      date: form.date.value
+      endDate: form.endDate.value
       };
-    let res = await fetch("/publicInfo", {
+    let res = await fetch("/viewMyFlights", {
       method: "POST",
       headers: {
       "Content-Type": "application/json"
@@ -45,8 +79,7 @@ async function fetchPublicInfo(e){
       //Header row
       let header = ["Flight #", "Departure Date", "Departure Time", "Airline",
         "Arrival Date", "Arrival Time", "Base Price", "Status", "Departure Port", "Arrival Port",
-        "Airplane Airline", "Plane ID", "Departure City", "Departure Port Name", "Arrival City", "Arrival Port Name"
-      ]
+        "Airplane Airline", "Plane ID", "Departure City", "Departure Port Name", "Arrival City", "Arrival Port Name"]
       //for every attribute, make a tableheader cell and add it to the first table row
       header.forEach((attribute) => {
           let th = document.createElement("th");
@@ -66,9 +99,12 @@ async function fetchPublicInfo(e){
   
           //Each row will store its flight data (for later use)
           row.flightData = flight;
+
           if(flight.status === "Cancelled"){
             row.className = "cancelled";
           }
+          row.classList.add("changeable");
+          row.addEventListener("click", deleteTicket);
   
           table.appendChild(row);
       });
@@ -78,6 +114,6 @@ async function fetchPublicInfo(e){
   
 }
 
-form.addEventListener("submit", fetchPublicInfo);
+form.addEventListener("submit", fetchFlightInfo);
 
-fetchPublicInfo();
+fetchFlightInfo();

@@ -12,8 +12,11 @@ body {
   }
 
 .pageContainer{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
   padding: 1rem;
-  height: 100%;
+  /* height: 100%; */
 }
   
   .topBar {
@@ -21,15 +24,22 @@ body {
     background-color: #2f3366; /* deep bluish purple */
     padding: 1rem 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
   }
+
+  .topBar div {
+    font-weight: bold;
+    font-size: 30px;
+  }
   
   .topBar h1 {
+    position: absolute;
+    right: 10px;
     text-decoration: none;
     background-color: #6a5acd;
     color: #ffffff;
@@ -48,6 +58,8 @@ body {
   }
   
   .topBar a {
+    position: absolute;
+    left:10px;
     text-decoration: none;
     background-color: #6a5acd;
     color: #ffffff;

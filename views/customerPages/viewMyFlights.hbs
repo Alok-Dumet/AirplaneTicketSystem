@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <style href=""></style>
 <html>
@@ -9,27 +10,23 @@
 </head>
 <body>
 
-  <p class="formAnchor">
-    {{#if user.email}}
-      <p class="formAnchor">
-        Go back to Home Page? <a href="/customerHome">Return</a>
-      </p>
-    {{else}}
-      {{#if user.username}}
-        <p class="formAnchor">
-          Go back to Home Page? <a href="/staffHome">Return</a>
-        </p>
-      {{else}}
-        <p class="formAnchor">
-          Go back to customer login? <a href="/customerLogin">Return</a>
-          Go back to staff login? <a href="/staffLogin">Return</a>
-        </p>
-      {{/if}}
-    {{/if}}
-  </p>
-  
+  <div class="topBar">
+    <a href="/logout">Logout</a>
+    <div> View My Flights </div>
+    <h1>Navigate</h1>
+  </div>
+
+  <div class="sideBar hidden">
+    <a href="/customerHome">Home</a>
+    <a href="/viewMyFlights">View My Flights</a>
+    <a href="/searchFlights">Search for Flights</a>
+    <a href="/purchaseTickets">Purchase Tickets</a>
+    <a href="/cancelTrip">Cancel Trip</a>
+    <a href="/ratingsComments">Rate and Comment</a>
+  </div>
+
   <div class="pageContainer">
-    <form method="POST" action="/publicInfo" class="inputs">
+    <form method="POST" action="/viewFlights" class="inputs">
       <select name="depArr" class="clickable">
         <option value="Departure" class="clickable">Departure</option>
         <option value="Arrival" class="clickable">Return</option>
@@ -38,16 +35,24 @@
       <input type="text" name="sourceName" placeholder="source port name"/>
       <input type="text" name="destCity" placeholder="destination port city "/>
       <input type="text" name="destName" placeholder="destination port name"/>
-      <input type="date" name="date" placeholder="date" class="clickable"/>
+        <label>
+          Start Date:
+          <input type="date" name="startDate" class="clickable"/>
+        </label>
+
+        <label>
+          End Date:
+          <input type="date" name="endDate" class="clickable"/>
+        </label>
       <input type="submit" class="searchButton clickable" value="Search"></input>
     </form>
 
-      <div class="resultsContainer">
+    <div class="resultsContainer"></div>
 
-      </div>
-  
   </div>
 
-  <script src="/js/publicInfo.js" defer></script>
-<body>
-<html>
+<script src="/js/topBar.js" defer></script>
+<script src="/js/customerjs/viewMyFlights.js" defer></script>
+
+</body>
+</html>

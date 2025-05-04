@@ -1,0 +1,38 @@
+
+
+<!DOCTYPE html>
+<style href=""></style>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="/css/general.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+
+  <div class="topBar">
+    <a href="/logout">Logout</a>
+    <div> Staff Home </div>
+    <h1>Navigate</h1>
+  </div>
+
+  <div class="sideBar hidden">
+    <a href="/staffHome">Home</a>
+    <a href="/viewFlights">View Flights</a>
+    <a href="/addFlights">Add Flights</a>
+    <a href="/changeStatus">Change Flight Status</a>
+    <a href="/addAirplanes">Add Airplane</a>
+    <a href="/addAirports">Add Airport</a>
+    <a href="/viewRatings">View Ratings</a>
+    <a href="/viewReports">View Reports</a> 
+  </div>
+
+  <div class="pageContainer">
+
+      <h1>Welcome Staff {{user.username}}</h1>
+
+  </div>
+
+<script src="/js/topBar.js" defer></script>
+
+</body>
+</html>

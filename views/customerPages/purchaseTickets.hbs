@@ -1,0 +1,73 @@
+
+
+<!DOCTYPE html>
+<style href=""></style>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="/css/general.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/search.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/popUp.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+
+  <div class="topBar">
+    <a href="/logout">Logout</a>
+    <div> Purchase Tickets </div>
+    <h1>Navigate</h1>
+  </div>
+
+  <div class="sideBar hidden">
+    <a href="/customerHome">Home</a>
+    <a href="/viewMyFlights">View My Flights</a>
+    <a href="/searchFlights">Search for Flights</a>
+    <a href="/purchaseTickets">Purchase Tickets</a>
+    <a href="/cancelTrip">Cancel Trip</a>
+    <a href="/ratingsComments">Rate and Comment</a>
+  </div>
+
+  <div class="pageContainer">
+    <form method="POST" action="/viewFlights" class="inputs">
+      <select name="depArr" class="clickable">
+        <option value="Departure" class="clickable">Departure</option>
+        <option value="Arrival" class="clickable">Return</option>
+      </select>
+      <input type="text" name="sourceCity" placeholder="source port city"/>
+      <input type="text" name="sourceName" placeholder="source port name"/>
+      <input type="text" name="destCity" placeholder="destination port city "/>
+      <input type="text" name="destName" placeholder="destination port name"/>
+        <label>
+          End Date:
+          <input type="date" name="endDate" class="clickable"/>
+        </label>
+      <input type="submit" class="searchButton clickable" value="Search"></input>
+    </form>
+
+    <div class="resultsContainer"></div>
+
+    <div class="popUp hidden" method="POST" action="/purchaseTickets">
+      <form class="popUpForm">
+        <h2>Purchase Ticket</h2>
+          <input type="text" name="card_type" placeholder="card type" required />
+          <input type="text" name="card_num" placeholder="card num" required />
+          <input type="text" name="card_name" placeholder="card name" required />
+          <div class="cardLabel">Card Expiration Date</div>
+          <input type="date" name="card_exp" placeholder="card expiration date" required />
+          <input type="hidden" name="flight_num"/>
+          <input type="hidden" name="dep_date"/>
+          <input type="hidden" name="dep_time"/>
+          <input type="hidden" name="line_name"/>
+        <div class="popUpFormButtons">
+          <input type="submit" value="Submit" />
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+<script src="/js/topBar.js" defer></script>
+<script src="/js/customerjs/purchaseTickets.js" defer></script>
+
+</body>
+</html>

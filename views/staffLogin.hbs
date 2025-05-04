@@ -3,24 +3,26 @@
 <html>
 <head>
 <title></title>
-<link rel="stylesheet" href="/loginRegister.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/general.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/form.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/loginRegister.css" type="text/css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-  <div class="publicPage">
-  <div class="loginRegisterContainer">
+
+  <div class="formContainer">
     <form method="POST" action="/staffLogin">
+      <div class="pageName">STAFF LOGIN</div>
       <input type="text" name="username" placeholder="username" required />
       <input type="password" name="password" placeholder="password" required />
       <input type="submit" value="Login" />
-      {{#if error}}<p><strong>Error:</strong> {{error}}</p>{{/if}}
+      {{#if error}}<p>{{error}}</p>{{/if}}
     </form>
-    <div class="loginRegisterAnchor">
+  </div>
+    <div class="formAnchor">
       <p>Don't Have a Customer Account? <a href="/customerRegister">Register</a></p>
       <p>Don't Have a Staff Account? <a href="/staffRegister">Register</a></p>
       <p>Want to Login as a Customer? <a href="/customerLogin">Login</a></p>
+      <p>Want to check flight info? <a href="/publicInfo">Check Flights</a></p>
     </div>
-    <p class="loginRegisterAnchor">
-      Want to check flight info? <a href="/publicInfo">Check Flights</a>
-    </p>
 </body>
 </html>

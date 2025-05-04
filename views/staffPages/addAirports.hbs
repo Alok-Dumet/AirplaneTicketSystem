@@ -1,0 +1,52 @@
+
+
+<!DOCTYPE html>
+<style href=""></style>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="/css/general.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/search.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/form.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+
+  <div class="topBar">
+    <a href="/logout">Logout</a>
+    <div> Add Airports </div>
+    <h1>Navigate</h1>
+  </div>
+
+  <div class="sideBar hidden">
+    <a href="/staffHome">Home</a>
+    <a href="/viewFlights">View Flights</a>
+    <a href="/addFlights">Add Flights</a>
+    <a href="/changeStatus">Change Flight Status</a>
+    <a href="/addAirplanes">Add Airplane</a>
+    <a href="/addAirports">Add Airport</a>
+    <a href="/viewRatings">View Ratings</a>
+    <a href="/viewReports">View Reports</a> 
+  </div>
+
+  <div class="pageContainer">
+    <div class="formContainer">
+      <form method="POST" action="/addAirplanes" class="addAirportsForm">
+        <input type="text" name="port_code" placeholder="Port Code" required/>
+        <input type="text" name="port_name" placeholder="Port Name" required/>
+        <input type="text" name="city" placeholder="City" required/>
+        <input type="text" name="country" placeholder="Country" required/>
+        <input type="submit" class="searchButton clickable" value="Submit"></input>
+        <div class="message"><p><strong></strong></p></div>
+      </form>    
+    </div>
+    
+
+    <div class="resultsContainer"></div>
+
+  </div>
+
+<script src="/js/topBar.js" defer></script>
+<script src="/js/staffjs/addAirports.js" defer></script>
+
+</body>
+</html>

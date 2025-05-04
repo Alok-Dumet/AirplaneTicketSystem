@@ -2,20 +2,6 @@
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #000d57;
-    color: #333;
-    height: 100%;
-    display:flex;
-    padding: 2rem 1rem;
-    height: 100vh;
-    align-items: center;
-    flex-direction: column;
-  }
-
 .clickable:hover{
   cursor:pointer;
 }
@@ -47,19 +33,38 @@ table {
   }
   
   th {
+    color: black;
     background-color: #f2f2f2;
     text-align: left;
   }
 
-  .loginRegisterAnchor a {
+  tr{
+    cursor: default;
+  }
+
+  .cancelled{
+    cursor: default;
+    background-color:#3547aa;
+  }
+
+  .formAnchor a {
     color: rgb(0, 208, 255);
     text-decoration: underline;
     font-weight: bold;
   }
 
-  .loginRegisterAnchor {
+  .formAnchor {
     margin-top: 5px;
     text-align: center;
     font-size: 0.95rem;
     color:#ffffff
   }
+
+.changeable{
+  transition: background-color 0.3s;
+}
+
+.changeable:hover{
+cursor:pointer;
+background-color: #0000ff;
+}

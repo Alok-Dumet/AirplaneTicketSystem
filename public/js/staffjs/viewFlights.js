@@ -1,7 +1,14 @@
-
 let form = document.querySelector(".inputs")
 
-async function fetchPublicInfo(e){
+let today = new Date();
+let thirtyDays = new Date();
+thirtyDays.setDate(today.getDate() + 30);
+
+//defaults all flights to being from now to thirty days later
+document.querySelector('input[name="startDate"]').value = today.toISOString().split('T')[0];
+document.querySelector('input[name="endDate"]').value = thirtyDays.toISOString().split('T')[0];
+
+async function fetchFlightInfo(e){
     //after posting your filters, don't reload the page
     if(e){
       e.preventDefault();
@@ -14,9 +21,10 @@ async function fetchPublicInfo(e){
       sourceName: form.sourceName.value,
       destCity: form.destCity.value,
       destName: form.destName.value,
-      date: form.date.value
+      startDate: form.startDate.value,
+      endDate: form.endDate.value
       };
-    let res = await fetch("/publicInfo", {
+    let res = await fetch("/viewFlights", {
       method: "POST",
       headers: {
       "Content-Type": "application/json"
@@ -45,8 +53,7 @@ async function fetchPublicInfo(e){
       //Header row
       let header = ["Flight #", "Departure Date", "Departure Time", "Airline",
         "Arrival Date", "Arrival Time", "Base Price", "Status", "Departure Port", "Arrival Port",
-        "Airplane Airline", "Plane ID", "Departure City", "Departure Port Name", "Arrival City", "Arrival Port Name"
-      ]
+        "Airplane Airline", "Plane ID", "Departure City", "Departure Port Name", "Arrival City", "Arrival Port Name", "Customers"]
       //for every attribute, make a tableheader cell and add it to the first table row
       header.forEach((attribute) => {
           let th = document.createElement("th");
@@ -78,6 +85,7 @@ async function fetchPublicInfo(e){
   
 }
 
-form.addEventListener("submit", fetchPublicInfo);
+form.addEventListener("submit", fetchFlightInfo);
 
-fetchPublicInfo();
+
+fetchFlightInfo();

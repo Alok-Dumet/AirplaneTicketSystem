@@ -4,23 +4,46 @@ import { connection } from '../db.mjs';
 
 const router = express.Router();
 
-//routes that users shouldn't be able to access unless logged in
-const protectedRoutes = ["/"];
+//routes that users can access without being logged in
+const publicRoutes = [
+  /^\/customerLogin$/, 
+  /^\/customerRegister$/, 
+  /^\/staffLogin$/, 
+  /^\/staffRegister$/,
+  /^\/publicInfo$/
+];
+
+const staffOnlyRoutes = [
+  /^\/viewFlights$/,
+  /^\/addFlights$/,
+  /^\/changeStatus$/,
+  /^\/viewAirplanes$/,
+  /^\/addAirplanes$/,
+  /^\/viewAirports$/,
+  /^\/addAirports$/,
+  /^\/viewFlightRatingsComments$/,
+  /^\/viewRatings$/,
+  /^\/viewReports$/
+];
 
 //If the user attempts to reach a protected route while not logged in, redirect to login page
-export default function isAuthenticated(req, res, next){
-  if(protectedRoutes.includes(req.path)){
-    if(req.session.username || req.session.email){
-      console.log(req.session.username, req.session.email);
-      next();
+export default function isAuthenticated(req, res, next) {
+  let isPublic = publicRoutes.some((pattern) => pattern.test(req.path));
+  let isStaffOnly = staffOnlyRoutes.some((pattern) => pattern.test(req.path));
+
+  if(!isPublic) {
+
+    if(!req.session.email && !req.session.username) {
+      return res.redirect("/customerLogin");
     }
-    else{
-      res.redirect("/customerLogin");
+
+    if(req.session.email && isStaffOnly){
+      return res.redirect("/customerHome");
     }
+
   }
-  else{
-    next();
-  }
+
+  next();
 }
 
 //Render customer register page
@@ -59,7 +82,18 @@ router.post('/customerRegister', (req, res) => {
             res.render('customerRegister', { error: err.message });
           }
             req.session.email = email;
-            res.redirect('/');
+            req.session.first_name = first_name;
+            req.session.last_name = last_name;
+            req.session.building_num = building_num;
+            req.session.street = street;
+            req.session.city = city;
+            req.session.state = state;
+            req.session.phone_num = phone_num;
+            req.session.passport_num = passport_num;
+            req.session.passport_exp = passport_exp;
+            req.session.passport_country = passport_country;
+            req.session.date_of_birth = date_of_birth;
+            res.redirect('/customerHome');
           });
     }
   });
@@ -74,23 +108,29 @@ router.get('/customerLogin', (req, res) => {
 router.post('/customerLogin', (req, res) => {
     let email = req.body.email;
     let password = req.body.password;
-    console.log("accessing database")
   connection.query('SELECT * FROM airplaneSystem.customer WHERE email = ?', [email], async (err, results) => {
     if (results.length > 0) {
-      console.log("comparing with hash");
       let found = await bcrypt.compare(password, results[0].password);
 
       if(found){
-        console.log("found")
-        req.session.email = email;
-        res.redirect('/');
+        req.session.email = results[0].email;
+        req.session.first_name = results[0].first_name;
+        req.session.last_name = results[0].last_name;
+        req.session.building_num = results[0].building_num;
+        req.session.street = results[0].street;
+        req.session.city = results[0].city;
+        req.session.state = results[0].state;
+        req.session.phone_num = results[0].phone_num;
+        req.session.passport_num = results[0].passport_num;
+        req.session.passport_exp = results[0].passport_exp;
+        req.session.passport_country = results[0].passport_country;
+        req.session.date_of_birth = results[0].date_of_birth;
+        res.redirect('/customerHome');
       }
       else{
-        console.log("wrong password")
         res.render('customerLogin', { error: 'Invalid credentials' });
       }
     } else {
-      console.log("user not found")
       res.render('customerLogin', { error: 'Invalid credentials' });
     }
   });
@@ -126,8 +166,12 @@ router.post('/staffRegister', (req, res) => {
               if(err){
                 res.render('staffRegister', { error: err.message });
               }
-                req.session.username = username;
-                res.redirect('/');
+              req.session.username = username;
+              req.session.first_name = first_name;
+              req.session.last_name = last_name;
+              req.session.date_of_birth = date_of_birth;
+              req.session.line_name = line_name;
+                res.redirect('/staffHome');
               });
         }
       });
@@ -144,23 +188,22 @@ router.get('/staffLogin', (req, res) => {
 router.post('/staffLogin', (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    console.log("accessing database")
   connection.query('SELECT * FROM airplaneSystem.airline_staff WHERE username = ?', [username], async (err, results) => {
     if (results.length > 0) {
-      console.log("comparing with hash");
       let found = await bcrypt.compare(password, results[0].password);
 
       if(found){
-        console.log("found")
-        req.session.username = username;
-        res.redirect('/');
+        req.session.username = results[0].username;
+        req.session.first_name = results[0].first_name;
+        req.session.last_name = results[0].last_name;
+        req.session.date_of_birth = results[0].date_of_birth;
+        req.session.line_name = results[0].line_name;
+        res.redirect('/staffHome');
       }
       else{
-        console.log("wrong password")
         res.render('staffLogin', { error: 'Invalid credentials' });
       }
     } else {
-      console.log("user not found")
       res.render('staffLogin', { error: 'Invalid credentials' });
     }
   });

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<style href=""></style>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="/css/general.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/form.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/search.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+
+  <div class="topBar">
+    <a href="/logout">Logout</a>
+    <div> Add Flights </div>
+    <h1>Navigate</h1>
+  </div>
+
+  <div class="sideBar hidden">
+    <a href="/staffHome">Home</a>
+    <a href="/viewFlights">View Flights</a>
+    <a href="/addFlights">Add Flights</a>
+    <a href="/changeStatus">Change Flight Status</a>
+    <a href="/addAirplanes">Add Airplane</a>
+    <a href="/addAirports">Add Airport</a>
+    <a href="/viewRatings">View Ratings</a>
+    <a href="/viewReports">View Reports</a> 
+  </div>
+
+  <div class="pageContainer">
+      <div class="formContainer">
+        <form method="POST" action="/addFlights">
+          <input type="text" name="flight_num" placeholder="Flight Number" required />
+          <label>Departure Date: <input type="date" name="dep_date" class="clickable" required /></label>
+          <label>Departure Time: <input type="time" name="dep_time" class="clickable" required /></label>
+          <label>Arrival Date: <input type="date" name="arr_date" class="clickable" required /></label>
+          <label>Arrival Time: <input type="time" name="arr_time" class="clickable" required /></label>
+          <input type="number" step="0.01" name="base_price" placeholder="Base Price" required />
+          <input type="text" name="status" placeholder="Flight Status" required />
+          <input type="text" name="dep_port" placeholder="Departure Port Code" required />
+          <input type="text" name="arr_port" placeholder="Arrival Port Code" required />
+          <input type="text" name="plane_ID" placeholder="Plane ID" required />
+          <input type="submit" class="searchButton clickable" value="Add" />
+          <div class="message"><p><strong></strong></p></div>
+        </form>      
+      </div>
+
+      <form method="POST" action="/viewFlights" class="inputs">
+        <select name="depArr" class="clickable">
+          <option value="Departure" class="clickable">Departure</option>
+          <option value="Arrival" class="clickable">Return</option>
+        </select>
+        <input type="text" name="sourceCity" placeholder="source port city" />
+        <input type="text" name="sourceName" placeholder="source port name" />
+        <input type="text" name="destCity" placeholder="destination port city " />
+        <input type="text" name="destName" placeholder="destination port name" />
+          <label>
+            Start Date:
+            <input type="date" name="startDate" class="clickable" />
+          </label>
+
+          <label>
+            End Date:
+            <input type="date" name="endDate" class="clickable" />
+          </label>
+        <input type="submit" class="searchButton clickable" value="Search"></input>
+      </form>
+
+      <div class="resultsContainer">
+
+      </div>
+
+  </div>
+
+<script src="/js/topBar.js" defer></script>
+<script src="/js/staffjs/addFlights.js" defer></script>
+
+</body>
+</html>

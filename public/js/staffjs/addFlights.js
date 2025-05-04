@@ -1,7 +1,15 @@
-
+let addFlight = document.querySelector(".formContainer form");
 let form = document.querySelector(".inputs")
 
-async function fetchPublicInfo(e){
+let today = new Date();
+let thirtyDays = new Date();
+thirtyDays.setDate(today.getDate() + 30);
+
+//defaults all flights to being from now to thirty days later
+document.querySelector('input[name="startDate"]').value = today.toISOString().split('T')[0];
+document.querySelector('input[name="endDate"]').value = thirtyDays.toISOString().split('T')[0];
+
+async function fetchFlightInfo(e){
     //after posting your filters, don't reload the page
     if(e){
       e.preventDefault();
@@ -14,9 +22,10 @@ async function fetchPublicInfo(e){
       sourceName: form.sourceName.value,
       destCity: form.destCity.value,
       destName: form.destName.value,
-      date: form.date.value
+      startDate: form.startDate.value,
+      endDate: form.endDate.value
       };
-    let res = await fetch("/publicInfo", {
+    let res = await fetch("/viewFlights", {
       method: "POST",
       headers: {
       "Content-Type": "application/json"
@@ -45,8 +54,7 @@ async function fetchPublicInfo(e){
       //Header row
       let header = ["Flight #", "Departure Date", "Departure Time", "Airline",
         "Arrival Date", "Arrival Time", "Base Price", "Status", "Departure Port", "Arrival Port",
-        "Airplane Airline", "Plane ID", "Departure City", "Departure Port Name", "Arrival City", "Arrival Port Name"
-      ]
+        "Airplane Airline", "Plane ID", "Departure City", "Departure Port Name", "Arrival City", "Arrival Port Name", "Customers"]
       //for every attribute, make a tableheader cell and add it to the first table row
       header.forEach((attribute) => {
           let th = document.createElement("th");
@@ -78,6 +86,36 @@ async function fetchPublicInfo(e){
   
 }
 
-form.addEventListener("submit", fetchPublicInfo);
+form.addEventListener("submit", fetchFlightInfo);
 
-fetchPublicInfo();
+addFlight.addEventListener("submit", async (event)=>{
+    event.preventDefault();
+  
+    let data = {
+      flight_num: addFlight.flight_num.value,
+      dep_date: addFlight.dep_date.value,
+      dep_time: addFlight.dep_time.value,
+      arr_date: addFlight.arr_date.value,
+      arr_time: addFlight.arr_time.value,
+      base_price: addFlight.base_price.value,
+      status: addFlight.status.value,
+      dep_port: addFlight.dep_port.value,
+      arr_port: addFlight.arr_port.value,
+      plane_ID: addFlight.plane_ID.value
+      };
+    let res = await fetch("/addFlights", {
+      method: "POST",
+      headers: {
+      "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+      });
+    res = await res.json();
+    let msg = document.querySelector(".message");
+    msg.textContent= res.message;
+  
+    fetchFlightInfo();
+})
+
+
+fetchFlightInfo();

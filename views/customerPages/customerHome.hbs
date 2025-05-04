@@ -1,0 +1,36 @@
+
+
+<!DOCTYPE html>
+<style href=""></style>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="/css/general.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+
+  <div class="topBar">
+    <a href="/logout">Logout</a>
+    <div> Customer Home </div>
+    <h1>Navigate</h1>
+  </div>
+
+  <div class="sideBar hidden">
+    <a href="/customerHome">Home</a>
+    <a href="/viewMyFlights">View My Flights</a>
+    <a href="/searchFlights">Search for Flights</a>
+    <a href="/purchaseTickets">Purchase Tickets</a>
+    <a href="/cancelTrip">Cancel Trip</a>
+    <a href="/ratingsComments">Rate and Comment</a>
+  </div>
+
+  <div class="pageContainer">
+
+      <h1>Welcome Customer {{user.email}}</h1>
+
+  </div>
+
+<script src="/js/topBar.js" defer></script>
+
+</body>
+</html>

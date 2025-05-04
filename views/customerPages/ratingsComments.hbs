@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<style href=""></style>
+<html>
+<head>
+<title></title>
+<link rel="stylesheet" href="/css/general.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/search.css" type="text/css" media="screen" title="no title" charset="utf-8">
+<link rel="stylesheet" href="/css/popUp.css" type="text/css" media="screen" title="no title" charset="utf-8">
+</head>
+<body>
+
+  <div class="topBar">
+    <a href="/logout">Logout</a>
+    <div> Rate and Comment </div>
+    <h1>Navigate</h1>
+  </div>
+
+  <div class="sideBar hidden">
+    <a href="/customerHome">Home</a>
+    <a href="/viewMyFlights">View My Flights</a>
+    <a href="/searchFlights">Search for Flights</a>
+    <a href="/purchaseTickets">Purchase Tickets</a>
+    <a href="/cancelTrip">Cancel Trip</a>
+    <a href="/ratingsComments">Rate and Comment</a>
+  </div>
+
+  <div class="pageContainer">
+    <div class="resultsContainer"></div>
+
+    <div class="popUp hidden" method="POST" action="/ratingsComments">
+      <form class="popUpForm">
+        <h2>Rate Your Trip</h2>
+        <label for="rating">Rating (1-5):</label>
+        <select name="rating" required>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <label for="comment">Comment:</label>
+        <textarea name="comment" placeholder="Write your comment here..."></textarea>
+        <input type="hidden" name="flight_num" />
+        <input type="hidden" name="dep_date" />
+        <input type="hidden" name="dep_time" />
+        <input type="hidden" name="line_name" />
+        <div class="popUpFormButtons">
+          <input type="submit" value="Submit Rating" />
+          <button type="button" class="cancel">Cancel</button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+<script src="/js/topBar.js" defer></script>
+<script src="/js/customerjs/ratingsComments.js" defer></script>
+
+</body>
+</html>

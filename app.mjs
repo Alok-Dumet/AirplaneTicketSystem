@@ -1,13 +1,14 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
-import express from 'express';
-import session from 'express-session';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import { connection } from './db.mjs';
+import express from "express";
+import session from "express-session";
+import { fileURLToPath } from "url";
+import path from "path";
 import {router as authorizationRouter} from "./routes/authorizationRoutes.mjs"
-import {router as publicRouter} from "./routes/publicRoute.mjs"
-import isAuthenticated from './routes/authorizationRoutes.mjs';
+import {router as publicRouter} from "./routes/publicRouter.mjs"
+import {router as staffRouter} from "./routes/staffRouter.mjs"
+import {router as customerRouter} from "./routes/customerRouter.mjs"
+import isAuthenticated from "./routes/authorizationRoutes.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,8 +16,8 @@ const __dirname = path.dirname(__filename);
 const app = express();
 
 //My view engine is handlebars
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "views"));
 
 //I accept post data as key=value pairs
 app.use(express.urlencoded({ extended: false }));
@@ -24,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 //allows me to read req.body as jsons also
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, "public")));
 
 //Setting up sessions. Adds the .user property to req
 app.use(session({
@@ -55,13 +56,29 @@ app.use(authorizationRouter);
 //Handles public info
 app.use(publicRouter);
 
-//Home page
-app.get('/', (req, res) => {
-  res.render('index');
+//Handles staff related stuff
+app.use(staffRouter);
+
+//Handles customer related stuff
+app.use(customerRouter);
+
+//Staff page
+app.get("/staffHome", (req, res) => {
+  res.render("staffPages/staffHome");
 });
 
-app.get('/logout', (req, res) => {
-  req.session.destroy(() => res.redirect('/customerLogin'));
+//customer page
+app.get("/customerHome", (req, res) => {
+  res.render("customerPages/customerHome");
+});
+
+app.get("/logout", (req, res) => {
+  if(req.session.email){
+    req.session.destroy(() => res.redirect("/customerLogin"));
+  }
+  else{
+    req.session.destroy(() => res.redirect("/staffLogin"));
+  }
 });
 
 app.listen(3000);
