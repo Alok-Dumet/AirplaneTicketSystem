@@ -68,7 +68,7 @@ async function fetchFlightInfo(e){
     if(flights.length === 0) {
       let noTable = document.createElement("div")
       noTable.className = "noTable";
-      noTable.textContent = "No flights found.";
+      noTable.textContent = "No trips taken";
       container.appendChild(noTable);
     }
     else

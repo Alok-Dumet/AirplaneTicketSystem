@@ -13,6 +13,7 @@ const publicRoutes = [
   /^\/publicInfo$/
 ];
 
+//staff only allowed routes
 const staffOnlyRoutes = [
   /^\/viewFlights$/,
   /^\/addFlights$/,
