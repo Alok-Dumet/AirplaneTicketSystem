@@ -1,3 +1,3 @@
 Airplane Ticket Reservation Project
 
-A project to test relational databases with Full-Stack Development
+Please refer to the documentation folder to the get a full idea of how it works!
